@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<familyset version="23">
+
+    <!--The following should be appended to android studio fonts.xml
+    located in [android studio installation path]/plugins/design-tools/resources/layoutlib/data -->
+
+    <!-- For fonts that must not flip font -->
+    <family name="sec-no-flip">
+        <font weight="400" style="normal">Roboto-Regular.ttf
+            <axis tag="ital" stylevalue="0" />
+            <axis tag="wdth" stylevalue="100" />
+            <axis tag="wght" stylevalue="400" />
+        </font>
+        <font weight="700" style="normal">Roboto-Regular.ttf
+            <axis tag="ital" stylevalue="0" />
+            <axis tag="wdth" stylevalue="100" />
+            <axis tag="wght" stylevalue="400" />
+        </font>
+    </family>
+
+    <!-- ADDED samsung OneUI 4.x style fonts -->
+    <family name="sec">
+        <font weight="300" style="normal">SEC-Light.ttf</font>
+        <font weight="400" style="normal">SEC-Regular.ttf</font>
+        <font weight="500" style="normal">SEC-Medium.ttf</font>
+        <font weight="600" style="normal">SEC-Medium.ttf</font>
+        <font weight="700" style="normal">SEC-Bold.ttf</font>
+    </family>
+
+    <alias name="sec-light" to="sec" weight="300" />
+    <alias name="sec-medium" to="sec" weight="500" />
+    <alias name="sec-semibold" to="sec" weight="600" />
+    <alias name="sec-bold" to="sec" weight="700" />
+
+    <!-- Added Samsung fonts for TouchWiz style -->
+    <family name="sec-roboto-light">
+        <font weight="400" style="normal" postScriptName="SEC-Regular_SamsungKoreanR">
+            SEC-Regular-Kor.ttf
+        </font>
+        <font weight="700" style="normal" postScriptName="SEC-Medium_SamsungKoreanM">
+            SEC-Medium-Kor.ttf
+        </font>
+    </family>
+
+    <!-- Added Number fonts for Hero UX models -->
+    <family name="roboto-num3L">
+        <font weight="300" style="normal">SECNum-3L.ttf</font>
+    </family>
+    <family name="roboto-num3R">
+        <font weight="400" style="normal">SECNum-3R.ttf</font>
+    </family>
+
+    <!-- Added Number fonts for OneUI 3.0 models -->
+    <family name="clock2019L-RM">
+        <font weight="400" style="normal" postScriptName="Clock2019L-RM_v1.0">
+            Clock2019L-RM.ttf
+        </font>
+    </family>
+    <family name="clock2021">
+        <font weight="400" style="normal" postScriptName="Clock2021-Regular">
+            Clock2021.ttf
+        </font>
+    </family>
+    <family name="clock2021-fixed">
+        <font weight="400" style="normal" postScriptName="Clock2021_Fixed-Regular">
+            Clock2021_Fixed.ttf
+        </font>
+    </family>
+
+</familyset>
