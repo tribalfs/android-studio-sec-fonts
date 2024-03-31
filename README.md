@@ -11,7 +11,7 @@ Studio.
 ## Usage
 
 Download
-the [repo](https://github.com/tribalfs/android-studio-sec-fonts/)
+the [repo](https://github.com/tribalfs/android-studio-sec-fonts/archive/refs/heads/main.zip)
 archive and extract it.
 
 Navigate to the "plugins/design-tools/resources/layoutlib/data/fonts" directory inside your Android
