@@ -39,40 +39,49 @@ function Merge-XmlContents {
     }
 }
 
-
 # Function to run Script 1
 function Run-SecFontsFix {
     Write-Host "Start Sec Fonts Render Fix..."
     $secFontsPath = "$PSScriptRoot\secfonts"
     Set-Location "$env:ProgramFiles\Android"
+
+    $found = $false
+
     Get-ChildItem -Directory | ForEach-Object {
         $dir = $_.FullName
-		$fontsDirectory = "$dir\plugins\design-tools\resources\layoutlib\data\fonts"
-		if (!(Test-Path $fontsDirectory)) {
-            Write-Host "plugins\design-tools\resources\layoutlib\data\fonts not found in $dir, skipping..."
-            continue
-        }
-        $fontsBackupDirectory = "$dir\plugins\design-tools\resources\layoutlib\data\fonts_backup"
-        if (!(Test-Path $fontsBackupDirectory)) {
-            Write-Host "Creating backup of original fonts..."
-            Copy-Item -Path $fontsDirectory -Destination $fontsBackupDirectory -Recurse
-        } else {
-            Write-Host "Fonts backup already exists, skipping backup..."
-        }
-        Write-Host "Copying sec font tff files..."
-		robocopy $secFontsPath $fontsDirectory *.ttf /IS /IM /XC /XN /njh /njs /ndl /nc /ns /np /nfl /ndl
+        $fontsDirectory = "$dir\plugins\design-tools\resources\layoutlib\data\fonts"
+        if (Test-Path $fontsDirectory) {
+            $found = $true
+            $fontsBackupDirectory = "$dir\plugins\design-tools\resources\layoutlib\data\fonts_backup"
+            if (!(Test-Path $fontsBackupDirectory)) {
+                Write-Host "Creating backup of original fonts..."
+                Copy-Item -Path $fontsDirectory -Destination $fontsBackupDirectory -Recurse
+            } else {
+                Write-Host "Fonts backup already exists, skipping backup..."
+            }
+            Write-Host "Copying sec font ttf files..."
+            robocopy $secFontsPath $fontsDirectory *.ttf /IS /IM /XC /XN /njh /njs /ndl /nc /ns /np /nfl /ndl
        
-        # Merge contents of fonts.xml with patch
-		Write-Host "Merging sec fonts.xml..."
-        $fontsXmlPath = Join-Path $fontsDirectory "fonts.xml"
-        $patchFilePath = Join-Path $secFontsPath "fonts.xml"
-        $mainXml = [xml](Get-Content $fontsXmlPath)
-        $patchXml = [xml](Get-Content $patchFilePath)
-        Merge-XmlContents -mainXml $mainXml -patchXml $patchXml
-        $mainXml.Save($fontsXmlPath)
+            # Merge contents of fonts.xml with patch
+            Write-Host "Merging sec fonts.xml..."
+            $fontsXmlPath = Join-Path $fontsDirectory "fonts.xml"
+            $patchFilePath = Join-Path $secFontsPath "fonts.xml"
+            $mainXml = [xml](Get-Content $fontsXmlPath)
+            $patchXml = [xml](Get-Content $patchFilePath)
+            Merge-XmlContents -mainXml $mainXml -patchXml $patchXml
+            $mainXml.Save($fontsXmlPath)
+        } else {
+            Write-Host "plugins\design-tools\resources\layoutlib\data\fonts not found in $dir, skipping..."
+        }
     }
-    Write-Host "Done!"
-	pause
+
+    if (-not $found) {
+        Write-Host "Error: No plugins\design-tools\resources\layoutlib\data\fonts directory found in any subfolder of ProgramFiles\Android." -ForegroundColor Red
+    } else {
+        Write-Host "Done!"
+    }
+
+    Pause
 }
 
 # Function to run Script 2
@@ -84,12 +93,14 @@ function Run-RestoreStockFonts {
             Write-Host "Restoring original fonts from backup..."
             Remove-Item -Path "$dir\plugins\design-tools\resources\layoutlib\data\fonts" -Recurse -Force
             Rename-Item "$dir\plugins\design-tools\resources\layoutlib\data\fonts_backup" fonts
+            Write-Host "Done!"
+        } else {
+            Write-Host "Error: fonts_backup folder not found!"
         }
     }
-    Write-Host "Done!"
+
     Pause
 }
-
 
 # Main script loop
 $continue = $true
@@ -106,8 +117,8 @@ while ($continue) {
         }
         '3' {
             Write-Host "Exiting..."
-			sleep 1
-			$continue = $false
+            sleep 1
+            $continue = $false
         }
         default {
             Write-Host "Invalid choice. Please select again."
@@ -115,4 +126,3 @@ while ($continue) {
         }
     }
 }
-
