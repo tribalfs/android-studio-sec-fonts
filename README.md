@@ -24,6 +24,8 @@ this everytime you need update Android Studio_
 - Add the all "*.tff" files from the "secfonts" folder of the downloaded archive.
 - Open the "fonts.xml" file and append to inside the `<familyset>` tag the contents from
   inside `<familyset>` tag of the "fonts.xml" found inside "secfonts" folder.
+- If present, open the "font_fallback.xml" file and append to inside the `<familyset>` tag the contents from
+  inside `<familyset>` tag of the "fonts.xml" found inside "secfonts" folder.
 
 For Windows, you can run `SecFontsFix.ps1` in Windows PowerShell to automatically perform the above
 including backing and and restoring the original "fonts" directory.
