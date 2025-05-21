@@ -28,4 +28,5 @@ this everytime you need update Android Studio_
   inside `<familyset>` tag of the "fonts.xml" found inside "secfonts" folder.
 
 For Windows, you can run `SecFontsFix.ps1` in Windows PowerShell to automatically perform the above
-including backing and and restoring the original "fonts" directory.
+including backing and and restoring the original "fonts" directory. This only works when android studio
+is installed in "%programfiles%\Android" or "%localappdata%\Programs".
