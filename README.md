@@ -30,3 +30,6 @@ this everytime you need update Android Studio.
 
 For Windows, you can run the included `SecFontsFix.ps1` in Windows PowerShell to automatically
 perform the above steps including the backing up and restoring the original "fonts" directory.
+
+For Mac, you can run the included `android_fonts_fix.command` in Terminal to automatically
+perform the above steps including the backing up and restoring the original "fonts" directory.
